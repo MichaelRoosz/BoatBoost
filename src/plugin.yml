@@ -1,0 +1,7 @@
+name: BoatBoost
+main: redecouverte.boatboost.BoatBoost
+version: 1.0
+website: http://forums.bukkit.org
+authors:
+  - Redecouverte
+description: Advanced boat mechanics for Minecraft.
