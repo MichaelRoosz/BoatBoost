@@ -41,7 +41,7 @@ public class EVehicleListener extends VehicleListener {
             BoostBoat boat = this.boatMgr.getBoostBoat(bukkitBoat);
             Block bu = this.boatMgr.getBlockUnderneath(bukkitBoat.getLocation());
 
-            if(bu.getType() != Material.OBSIDIAN && (!boat.isMoving() || boat.equalsBoatLastLocation(bukkitBoat.getLocation())))
+            if(bu.getType() != Material.OBSIDIAN && !boat.isOnGround() &&(!boat.isMoving() || boat.equalsBoatLastLocation(bukkitBoat.getLocation())))
             {
                 return;
             }
@@ -103,11 +103,10 @@ public class EVehicleListener extends VehicleListener {
             Boat bukkitBoat = (Boat)event.getVehicle();
             BoostBoat boat = this.boatMgr.getBoostBoat(bukkitBoat);
 
-            if(boat.foundWood() && event.getBlock().getType() == Material.WOOD)
-            {
-                boat.setVelocity(0D, 0D, 0D);
-            }
-            
+             if (boat.foundWood() && event.getBlock().getType() == Material.WOOD) {
+                 boat.setVelocity(0D, 0D, 0D);
+             } 
+     
         } catch (Exception e) {
             logger.log(Level.WARNING, "BoatBoost: error: " + e.getMessage());
             e.printStackTrace();
@@ -134,8 +133,12 @@ public class EVehicleListener extends VehicleListener {
                     Boat bukkitBoat2 = (Boat) e;
                     BoostBoat boat2 = this.boatMgr.getBoostBoat(bukkitBoat2);
 
-                    boat.setVelocity(0D, 0D, 0D);
-                    boat2.setVelocity(0D, 0D, 0D);
+                    if (boat.foundWood()) {
+                        boat.setVelocity(0D, 0D, 0D);
+                    }
+                    if (boat2.foundWood()) {
+                        boat2.setVelocity(0D, 0D, 0D);
+                    }
 
                     event.setCancelled(true);
                     event.setCollisionCancelled(true);

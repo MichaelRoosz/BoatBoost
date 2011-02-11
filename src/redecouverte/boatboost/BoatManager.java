@@ -49,10 +49,12 @@ public class BoatManager {
 
         Block block;
 
+        int i = 0;
         do {
             block = loc.getWorld().getBlockAt(loc.getBlockX(), y, loc.getBlockZ());
             y--;
-        } while (y > 0
+            i++;
+        } while (y > 0 && i < 11
                 && (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER
                 || block.getType() == Material.LAVA || block.getType() == Material.STATIONARY_LAVA));
 

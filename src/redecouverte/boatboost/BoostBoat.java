@@ -217,6 +217,13 @@ public class BoostBoat {
         return bu.isBlockIndirectlyPowered();
     }
 
+
+    public boolean isOnGround() {
+
+        EntityBoat be = (EntityBoat) ((CraftBoat) this.boat).getHandle();
+        return be.onGround;
+    }
+
     public void onPassingBlock(Block b) {
 
         if (!this.boat.isEmpty()) {
@@ -229,6 +236,11 @@ public class BoostBoat {
             double pz = pv.getZ();
 
             if (px != 0D || pz != 0D) {
+
+                if (this.isOnGround()) {
+                    this.setVelocity(px * 3, this.getVelocityY(), pz * 3);
+                }
+
                 double curX = this.getVelocityX();
                 double curZ = this.getVelocityZ();
 
@@ -242,8 +254,8 @@ public class BoostBoat {
                 }
 
                 if (boostSteering) {
-                    curX = curX / 2 + px;
-                    curZ = curZ / 2 + pz;
+                    curX = curX / 1.5D + px;
+                    curZ = curZ / 1.5D + pz;
                     this.setVelocity(curX, this.getVelocityY(), curZ);
                 }
             }
